@@ -8,6 +8,7 @@ import {
 import { GiCardPickup } from "@react-icons/all-files/gi/GiCardPickup";
 import { GrDeliver } from "@react-icons/all-files/gr/GrDeliver";
 import { moneyFormat } from "../../utils/helpers";
+import "./style.css";
 
 const ListComponent = ({ data = [] }) => {
   const cache = React.useRef(
@@ -41,19 +42,29 @@ const ListComponent = ({ data = [] }) => {
                   <li className="collection-item avatar">
                     <i className="material-icons circle">
                       {order.type === "pickup" ? (
-                        <GiCardPickup color="green" size={30} />
+                        <GiCardPickup
+                          className="iconColumn"
+                          color="green"
+                          size={30}
+                        />
                       ) : (
                         <GrDeliver color="red" size={30} />
                       )}
                     </i>
-                    <h6 className="title bold">
-                      Название клиента : {order.name}
-                    </h6>
-                    <p>
-                      Тип заявки:
-                      {order.type === "pickup" ? " Забор" : " Доставка"}
-                    </p>
-                    <p>Цена заявки: {moneyFormat(order.price)} тг.</p>
+                    <div className="spaceBeetween">
+                      <h5 className="title bold clientColumn">
+                        Название клиента : <br />
+                        {order.name}
+                      </h5>
+                      <h5 className="bold" style={{ width: "30%" }}>
+                        Тип заявки: <br />
+                        {order.type === "pickup" ? " Забор" : " Доставка"}
+                      </h5>
+                      <h5 className="title bold" style={{ width: "30%" }}>
+                        Цена заявки: <br />
+                        {moneyFormat(order.price)} тг.
+                      </h5>
+                    </div>
                   </li>
                 </ul>
               </CellMeasurer>

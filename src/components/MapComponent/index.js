@@ -2,6 +2,7 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "./Map.css";
 import MarkerClusterGroup from "../../utils/reactLeafletMarkercluster";
+import { moneyFormat } from "../../utils/helpers";
 
 const MapComponent = ({ data = [] }) => {
   const center = [43.238949, 76.889709];
@@ -10,7 +11,7 @@ const MapComponent = ({ data = [] }) => {
 
   return (
     <MapContainer
-      className="markercluster-map"
+      //className="markercluster-map"
       center={center}
       zoom={13}
       scrollWheelZoom={true}
@@ -32,7 +33,7 @@ const MapComponent = ({ data = [] }) => {
             <Popup>
               <p>ID заказа: {item.id}</p>
               <p>Название клиента: {item.name}</p>
-              <p>Цена заказа: {item.price} тг.</p>
+              <p>Цена заказа: {moneyFormat(item.price)} тг.</p>
             </Popup>
           </Marker>
         ))}
