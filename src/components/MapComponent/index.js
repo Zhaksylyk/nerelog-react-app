@@ -22,14 +22,17 @@ const MapComponent = ({ data = [] }) => {
           <Marker
             key={index}
             position={[item.coords.lat, item.coords.long]}
-            onMouseOver={() => { openPopup() }}
-            onMouseOut={() => { closePopup() }}
+            onMouseOver={() => {
+              openPopup();
+            }}
+            onMouseOut={() => {
+              closePopup();
+            }}
           >
             <Popup>
-              <h4>{`id: ${item.id}`}</h4>
-              <h4>{`Название клиента
-: ${item.name}`}</h4>
-              <h4>{`Цена: ${item.price} тг.`}</h4>
+              <p>ID заказа: {item.id}</p>
+              <p>Название клиента: {item.name}</p>
+              <p>Цена заказа: {item.price} тг.</p>
             </Popup>
           </Marker>
         ))}

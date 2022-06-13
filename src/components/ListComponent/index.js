@@ -5,6 +5,9 @@ import {
   CellMeasurer,
   CellMeasurerCache,
 } from "react-virtualized";
+import { GiCardPickup } from "@react-icons/all-files/gi/GiCardPickup";
+import { GrDeliver } from "@react-icons/all-files/gr/GrDeliver";
+import { moneyFormat } from "../../utils/helpers";
 
 const ListComponent = ({ data = [] }) => {
   const cache = React.useRef(
@@ -13,45 +16,8 @@ const ListComponent = ({ data = [] }) => {
       defaultHeight: 100,
     })
   );
-  const rowRenderer = ({
-    key, // Unique key within array of rows
-    index, // Index of row within collection
-    isScrolling, // The List is currently being scrolled
-    isVisible, // This row is visible within the List (eg it is not an overscanned row)
-    style, // Style object to be applied to row (to position it)
-  }) => {
-    console.log("index", index);
-    console.log("KEY", key);
-    return (
-      <ul key={data[index].id} style={{ height: 100 }} className="collection">
-        <li className="collection-item avatar">
-          <i className="material-icons circle">Logo</i>
-          <span className="title">{`Название: ${data[index].name} `}</span>
-          <p>{`ID: ${data[index].id} `}</p>
-          <p>Тип: {data[index].type === "pickup" ? "Забор" : "Доставка"}</p>
-          <p>{`Цена: ${data[index].price} тг.`}</p>
-        </li>
-      </ul>
-    );
-  };
+
   return (
-    // <AutoSizer>
-    //   {({ width, height }) => {
-    //     console.log("width", width);
-    //     console.log("height", height);
-    //     return (
-    //       <List
-    //         autoHeight={true}
-    //         width={width}
-    //         height={height}
-    //         rowCount={data.length}
-    //         overscanRowCount={10}
-    //         rowHeight={100}
-    //         rowRenderer={rowRenderer}
-    //       />
-    //     );
-    //   }}
-    // </AutoSizer>
     <AutoSizer>
       {({ width, height }) => (
         <List
@@ -73,11 +39,21 @@ const ListComponent = ({ data = [] }) => {
               >
                 <ul key={data[index].id} style={style} className="collection">
                   <li className="collection-item avatar">
-                    <i className="material-icons circle">Logo</i>
-                    <span className="title">Название: {order.name}</span>
-                    <p>ID: {order.id}</p>
-                    <p>Заказ: {order.type}</p>
-                    <p>Цена: {order.price}</p>
+                    <i className="material-icons circle">
+                      {order.type === "pickup" ? (
+                        <GiCardPickup color="green" size={30} />
+                      ) : (
+                        <GrDeliver color="red" size={30} />
+                      )}
+                    </i>
+                    <h6 className="title bold">
+                      Название клиента : {order.name}
+                    </h6>
+                    <p>
+                      Тип заявки:
+                      {order.type === "pickup" ? " Забор" : " Доставка"}
+                    </p>
+                    <p>Цена заявки: {moneyFormat(order.price)} тг.</p>
                   </li>
                 </ul>
               </CellMeasurer>
