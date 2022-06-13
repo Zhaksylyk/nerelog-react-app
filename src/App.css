@@ -1,0 +1,18 @@
+.main-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+.list-container {
+  position: relative;
+  display: flex;
+  width: 28vw;
+  border: 3px solid #888;
+}
+
+.map-container {
+  position: relative;
+  display: flex;
+  width: 70vw;
+  border: 3px solid #888;
+}
